@@ -3,6 +3,7 @@ pragma solidity ^0.4.4;
 contract Token {
     111
     222
+    333
 
     /// @return total amount of tokens
     function totalSupply() constant returns (uint256 supply) {}
