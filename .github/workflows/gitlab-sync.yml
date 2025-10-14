@@ -2,7 +2,7 @@ name: Auto Sync to GitLab
 
 on:
   push: # GitHub仓库有提交时触发
-    branches: [ main ]
+    branches: [master]
   schedule: # 每天UTC 0点同步（可选）
     - cron: '0 0 * * *'
 
