@@ -7,6 +7,7 @@ contract Token {
     444
     555
     666
+    777
 
     /// @return total amount of tokens
     function totalSupply() constant returns (uint256 supply) {}
