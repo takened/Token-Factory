@@ -20,5 +20,5 @@ jobs:
 
       - name: Push to GitLab
         run: |
-          git remote add gitlab http://${{ secrets.GITLAB_USERNAME }}:${{ secrets.GITLAB_TOKEN }}@xxxxxxxxx/your-project.git
+          git remote add gitlab http://${{ secrets.GITLAB_USERNAME }}:${{ secrets.GITLAB_TOKEN }}@1.95.34.168:8099/renfuxing/power.git
           git push gitlab main
