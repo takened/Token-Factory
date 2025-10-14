@@ -1,9 +1,9 @@
 name: Auto Sync to GitLab
 
 on:
-  push: # GitHub仓库有提交时触发
-    branches: [master]
-  schedule: # 每天UTC 0点同步（可选）
+  push:
+    branches: [main]
+  schedule:
     - cron: '0 0 * * *'
 
 jobs:
@@ -12,6 +12,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 拉取完整历史
+          ref: main # 明确检出 main 分支
+
+      - name: Check local branches (debug)
+        run: |
+          git branch -a
+          git log --oneline
 
       - name: Configure Git
         run: |
@@ -20,5 +28,8 @@ jobs:
 
       - name: Push to GitLab
         run: |
-          git remote add gitlab http://${{ secrets.GITLAB_USERNAME }}:${{ secrets.GITLAB_TOKEN }}@1.95.34.168:8099/renfuxing/power.git
-          git push gitlab main
+          if ! git remote | grep -q "gitlab"; then
+            git remote add gitlab http://${{ secrets.GITLAB_USERNAME }}:${{ secrets.GITLAB_TOKEN }}@1.95.34.168:8099/renfuxing/power.git
+          fi
+          # 推送当前分支（自动匹配远程）
+          git push gitlab HEAD
